@@ -126,6 +126,50 @@ function binarySearchLoopRepeat2($arr, $search_val){
 $arr4 = [2, 5, 6, 7, 8, 9, 9, 9, 10];
 var_dump(binarySearchLoopRepeat2($arr4, 9));
 
+/**
+* 二分查找——》查找第一个大于等于给定值的元素
+* @date:2019年2月12日 上午10:36:04
+* @author:hiyanxu
+*/
+function binarySearchLoop3($arr, $val){
+    /*
+     * 查找第一个大于等于给定值的元素
+     * 例如：2, 5, 9, 11, 19, 21  查找第一个大于等于10的元素，也就是查找11，最终得出的下标应该是3
+     * */
+    $low = 0;
+    $height = count($arr) - 1;
+    while($low <= $height){
+        $mid = floor(($low + $height)/2);
+        //根据查询到的数据来判断
+        if ($arr[$mid] >= $val){  //数据在low至mid中间  因为要求查找大于等于，则若是数列中存在10，则应该查找出10，所以需要增加一个等号
+            //因为mid下标对应的值大于等于val，则表示mid满足该条件，则需要判断mid是否满足“第一个”的条件
+            if (($mid == 0) || ($arr[$mid-1] < $val)){  //其下标是0，或其前一个数据小于该值，则其是第一个
+                return $mid;
+            } else {  //则表示mid不是第一个，则其左边的数据也满足条件，则数据在low至mid-1中
+                $height = $mid - 1;
+            }
+        } else {  //表示满足条件的数据在mid至height中
+            $low = $mid + 1;
+        }
+    }
+    
+    return -1;
+}
+$arr4 = [2, 5, 9, 11, 19, 21];
+var_dump(binarySearchLoop3($arr4, 4));
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
